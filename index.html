@@ -25,7 +25,7 @@
   </header>
   <main class="container">
     <div data-view="entry-form">
-      <form>
+      <form class="new-entry">
         <div class="row">
           <div class="column-half">
             <h1>New Entry</h1>
@@ -33,7 +33,10 @@
         </div>
         <div class="row">
           <div class="column-half">
-            <img src="images/placeholder-image-square.jpg" alt="a relavant image">
+            <img src="images/placeholder-image-square.jpg"
+              alt="The image for the current entry"
+              class="journal-photo"
+              onerror="src='images/placeholder-image-square.jpg';">
           </div>
           <div class="column-half">
             <div class="label">
@@ -51,7 +54,7 @@
             <div class="label">
               <label for="notes">Notes</label>
             </div>
-            <textarea name="notes" id="notes" rows="6" required></textarea>
+            <textarea name="notes" id="notes" rows="7" required></textarea>
           </div>
         </div>
         <div class="row">
