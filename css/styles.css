@@ -21,6 +21,17 @@ h2 {
   font-weight: normal;
 }
 
+h3 {
+  font-size: 21px;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 0;
+}
+
 main {
   padding-bottom: 30px;
 }
@@ -66,6 +77,15 @@ button {
   border-radius: 4px;
   padding: 5px 10px;
   letter-spacing: 1.5px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+li {
+  padding: 0 0 30px;
 }
 
 input:focus,
