@@ -2,7 +2,10 @@ var $photo = document.querySelector('#photo');
 var $journalPhoto = document.querySelector('.journal-photo');
 var $newEntry = document.querySelector('.new-entry');
 var $entryList = document.querySelector('.entry-list');
+var $view = document.getElementsByClassName('view');
+var $swapToEntries = document.querySelector('.swap-to-entries');
 
+// Event listeners below:
 $photo.addEventListener('input', function (e) {
   $journalPhoto.setAttribute('src', e.target.value);
 });
@@ -26,7 +29,33 @@ document.addEventListener('DOMContentLoaded', function (e) {
     var $entry = renderEntry(data.entries[i]);
     $entryList.appendChild($entry);
   }
+
+  if ($entryList.children.length) {
+    toggleNoEntries();
+  }
 });
+
+$swapToEntries.addEventListener('click', function (e) {
+  viewSwap('entries');
+});
+
+// Function declarations below:
+function toggleNoEntries() {
+  var $noEntries = document.querySelector('.no-entries');
+  var classes = $noEntries.classList;
+  classes.toggle('hidden');
+}
+
+function viewSwap(view) {
+  data.view = view;
+  for (var i = 0; i < $view.length; i++) {
+    if ($view[i].getAttribute('data-view') === view) {
+      $view[i].className = 'view';
+    } else {
+      $view[i].className = 'view hidden';
+    }
+  }
+}
 
 function renderEntry(entry) {
   var $entry = document.createElement('li');
