@@ -20,9 +20,15 @@ $newEntry.addEventListener('submit', function (e) {
     entryId: data.nextEntryId
   };
   data.nextEntryId++;
-  data.entries.push(entry);
+  data.entries.unshift(entry);
   $journalPhoto.setAttribute('src', 'images/placeholder-image-square.jpg');
   $newEntry.reset();
+  var $entry = renderEntry(entry);
+  $entryList.prepend($entry);
+  viewSwap('entries');
+  if (data.entries.length === 1) {
+    toggleNoEntries();
+  }
 });
 
 document.addEventListener('DOMContentLoaded', function (e) {
@@ -30,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
     var $entry = renderEntry(data.entries[i]);
     $entryList.appendChild($entry);
   }
+
+  viewSwap(data.view);
 
   if ($entryList.children.length) {
     toggleNoEntries();
