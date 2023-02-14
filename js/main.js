@@ -4,6 +4,7 @@ var $newEntry = document.querySelector('.new-entry');
 var $entryList = document.querySelector('.entry-list');
 var $view = document.getElementsByClassName('view');
 var $swapToEntries = document.querySelector('.swap-to-entries');
+var $newEntryButton = document.querySelector('.new-entry-button');
 
 // Event listeners below:
 $photo.addEventListener('input', function (e) {
@@ -37,6 +38,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
 $swapToEntries.addEventListener('click', function (e) {
   viewSwap('entries');
+});
+
+$newEntryButton.addEventListener('click', function (e) {
+  viewSwap('entry-form');
 });
 
 // Function declarations below:

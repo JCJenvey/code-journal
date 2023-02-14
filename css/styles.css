@@ -12,6 +12,10 @@ header {
   position: relative;
 }
 
+h1 {
+  margin: 21px 0;
+}
+
 h2 {
   margin: 0;
   font-weight: normal;
@@ -121,6 +125,21 @@ button:hover {
 .no-entries {
   text-align: center;
   padding: 40px 0;
+}
+
+.new-entry-button,
+.new-entry-header {
+  display: inline-block;
+}
+
+.new-entry-button {
+  float: right;
+  background-color: rgb(61, 0, 80);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  padding: 7px 14px;
+  margin: 25px 0;
 }
 
 @media screen and (min-width: 768px) {
