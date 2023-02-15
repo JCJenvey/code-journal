@@ -1,7 +1,3 @@
-/* html {
-  background-color: rgb(61, 0, 80);
-} */
-
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: rgb(240, 240, 240);
@@ -16,9 +12,24 @@ header {
   position: relative;
 }
 
+h1 {
+  margin: 21px 0;
+}
+
 h2 {
   margin: 0;
   font-weight: normal;
+}
+
+h3 {
+  font-size: 21px;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 0;
 }
 
 main {
@@ -48,6 +59,9 @@ textarea {
 
 img {
   width: 100%;
+  object-fit: cover;
+  object-position: center;
+  max-height: 350px;
 }
 
 input {
@@ -68,6 +82,15 @@ button {
   letter-spacing: 1.5px;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+li {
+  padding: 0 0 30px;
+}
+
 input:focus,
 textarea:focus {
   outline-color: rgb(61, 0, 80);
@@ -75,6 +98,17 @@ textarea:focus {
 
 button:hover {
   cursor: pointer;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.swap-to-entries {
+  text-decoration: none;
+  color: white;
+  padding-left: 20px;
 }
 
 .label {
@@ -86,4 +120,30 @@ button:hover {
   display: flex;
   justify-content: flex-end;
   padding-bottom: 20px;
+}
+
+.no-entries {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.new-entry-button,
+.new-entry-header {
+  display: inline-block;
+}
+
+.new-entry-button {
+  float: right;
+  background-color: rgb(61, 0, 80);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  padding: 7px 14px;
+  margin: 25px 0;
+}
+
+@media screen and (min-width: 768px) {
+  img {
+    max-height: 100%;
+  }
 }
