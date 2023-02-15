@@ -52,6 +52,28 @@ $newEntryButton.addEventListener('click', function (e) {
   viewSwap('entry-form');
 });
 
+$entryList.addEventListener('click', function (e) {
+  if (e.target && e.target.tagName === 'I') {
+    viewSwap('entry-form');
+    var $entryType = document.querySelector('.entry-type');
+    var $dataEntryId = e.target.closest('[data-entry-id]');
+    var $title = document.querySelector('#title');
+    var $notes = document.querySelector('#notes');
+    $dataEntryId = parseInt($dataEntryId.getAttribute('data-entry-id'), 10);
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === $dataEntryId) {
+        data.editing = data.entries[i];
+      }
+    }
+    $title.value = data.editing.title;
+    $photo.value = data.editing.photoUrl;
+    $journalPhoto.setAttribute('src', data.editing.photoUrl);
+    $notes.textContent = data.editing.notes;
+
+    $entryType.textContent = 'Edit Entry';
+  }
+});
+
 // Function declarations below:
 function toggleNoEntries() {
   var $noEntries = document.querySelector('.no-entries');
@@ -72,6 +94,7 @@ function viewSwap(view) {
 
 function renderEntry(entry) {
   var $entry = document.createElement('li');
+  $entry.setAttribute('data-entry-id', entry.entryId);
 
   var $row = document.createElement('div');
   $row.setAttribute('class', 'row');
@@ -88,6 +111,9 @@ function renderEntry(entry) {
   var $title = document.createElement('h3');
   $title.textContent = entry.title;
 
+  var $pen = document.createElement('i');
+  $pen.setAttribute('class', 'fa-solid fa-pen pen');
+
   var $notes = document.createElement('p');
   $notes.textContent = entry.notes;
 
@@ -95,6 +121,7 @@ function renderEntry(entry) {
   $row.append($firstColumn, $secondColumn);
   $firstColumn.append($img);
   $secondColumn.append($title, $notes);
+  $title.append($pen);
 
   return $entry;
 }
