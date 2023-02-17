@@ -1,6 +1,7 @@
 var $photo = document.querySelector('#photo');
 var $journalPhoto = document.querySelector('.journal-photo');
 var $newEntry = document.querySelector('.new-entry');
+var $entryType = document.querySelector('.entry-type');
 var $entryList = document.querySelector('.entry-list');
 var $view = document.getElementsByClassName('view');
 var $swapToEntries = document.querySelector('.swap-to-entries');
@@ -13,18 +14,34 @@ $photo.addEventListener('input', function (e) {
 
 $newEntry.addEventListener('submit', function (e) {
   e.preventDefault();
-  var entry = {
-    title: $newEntry.elements.title.value,
-    photoUrl: $newEntry.elements['photo-url'].value,
-    notes: $newEntry.elements.notes.value,
-    entryId: data.nextEntryId
-  };
-  data.nextEntryId++;
-  data.entries.unshift(entry);
+  if (data.editing === null) {
+    var entry = {
+      title: $newEntry.elements.title.value,
+      photoUrl: $newEntry.elements['photo-url'].value,
+      notes: $newEntry.elements.notes.value,
+      entryId: data.nextEntryId
+    };
+    data.nextEntryId++;
+    data.entries.unshift(entry);
+    var $entry = renderEntry(entry);
+    $entryList.prepend($entry);
+  } else {
+    data.entries[findEntryId(data.editing.entryId)].title = $newEntry.elements.title.value;
+    data.entries[findEntryId(data.editing.entryId)].photoUrl = $newEntry.elements['photo-url'].value;
+    data.entries[findEntryId(data.editing.entryId)].notes = $newEntry.elements.notes.value;
+    var $editedEntry = renderEntry(data.entries[findEntryId(data.editing.entryId)]);
+    var $listOfEntries = $entryList.getElementsByTagName('li');
+    for (var i = 0; i < $listOfEntries.length; i++) {
+      var $dataEntryId = parseInt($listOfEntries[i].getAttribute('data-entry-id'), 10);
+      if ($dataEntryId === data.editing.entryId) {
+        $listOfEntries[i].replaceWith($editedEntry);
+      }
+    }
+    $entryType.textContent = 'New Entry';
+    data.editing = null;
+  }
   $journalPhoto.setAttribute('src', 'images/placeholder-image-square.jpg');
   $newEntry.reset();
-  var $entry = renderEntry(entry);
-  $entryList.prepend($entry);
   viewSwap('entries');
   if (data.entries.length === 1) {
     toggleNoEntries();
@@ -52,6 +69,23 @@ $newEntryButton.addEventListener('click', function (e) {
   viewSwap('entry-form');
 });
 
+$entryList.addEventListener('click', function (e) {
+  if (e.target && e.target.tagName === 'I') {
+    viewSwap('entry-form');
+    var $dataEntryId = e.target.closest('[data-entry-id]');
+    var $title = document.querySelector('#title');
+    var $notes = document.querySelector('#notes');
+    $dataEntryId = parseInt($dataEntryId.getAttribute('data-entry-id'), 10);
+    data.editing = data.entries[findEntryId($dataEntryId)];
+    $title.value = data.editing.title;
+    $photo.value = data.editing.photoUrl;
+    $journalPhoto.setAttribute('src', data.editing.photoUrl);
+    $notes.textContent = data.editing.notes;
+
+    $entryType.textContent = 'Edit Entry';
+  }
+});
+
 // Function declarations below:
 function toggleNoEntries() {
   var $noEntries = document.querySelector('.no-entries');
@@ -72,6 +106,7 @@ function viewSwap(view) {
 
 function renderEntry(entry) {
   var $entry = document.createElement('li');
+  $entry.setAttribute('data-entry-id', entry.entryId);
 
   var $row = document.createElement('div');
   $row.setAttribute('class', 'row');
@@ -88,6 +123,9 @@ function renderEntry(entry) {
   var $title = document.createElement('h3');
   $title.textContent = entry.title;
 
+  var $pen = document.createElement('i');
+  $pen.setAttribute('class', 'fa-solid fa-pen pen');
+
   var $notes = document.createElement('p');
   $notes.textContent = entry.notes;
 
@@ -95,6 +133,7 @@ function renderEntry(entry) {
   $row.append($firstColumn, $secondColumn);
   $firstColumn.append($img);
   $secondColumn.append($title, $notes);
+  $title.append($pen);
 
   return $entry;
 }
@@ -103,4 +142,12 @@ function makeColumnHalf() {
   var col = document.createElement('div');
   col.setAttribute('class', 'column-half');
   return col;
+}
+
+function findEntryId(entryId) {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === entryId) {
+      return i;
+    }
+  }
 }
