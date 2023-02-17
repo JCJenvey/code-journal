@@ -1,4 +1,6 @@
 var $photo = document.querySelector('#photo');
+var $title = document.querySelector('#title');
+var $notes = document.querySelector('#notes');
 var $journalPhoto = document.querySelector('.journal-photo');
 var $newEntry = document.querySelector('.new-entry');
 var $entryType = document.querySelector('.entry-type');
@@ -38,6 +40,7 @@ $newEntry.addEventListener('submit', function (e) {
       }
     }
     $entryType.textContent = 'New Entry';
+    $notes.textContent = '';
     data.editing = null;
   }
   $journalPhoto.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -73,8 +76,6 @@ $entryList.addEventListener('click', function (e) {
   if (e.target && e.target.tagName === 'I') {
     viewSwap('entry-form');
     var $dataEntryId = e.target.closest('[data-entry-id]');
-    var $title = document.querySelector('#title');
-    var $notes = document.querySelector('#notes');
     $dataEntryId = parseInt($dataEntryId.getAttribute('data-entry-id'), 10);
     data.editing = data.entries[findEntryId($dataEntryId)];
     $title.value = data.editing.title;
