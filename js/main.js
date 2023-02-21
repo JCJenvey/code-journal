@@ -109,7 +109,7 @@ $modalConfirm.addEventListener('click', function (e) {
       }
     }
   }
-  if (data.entries.length !== 1) {
+  if (data.entries.length === 0) {
     toggleNoEntries();
   }
   viewSwap('entries');
