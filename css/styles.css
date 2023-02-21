@@ -73,15 +73,6 @@ textarea {
   resize: none;
 }
 
-button {
-  color: white;
-  background-color: rgb(61, 0, 80);
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  letter-spacing: 1.5px;
-}
-
 ul {
   list-style-type: none;
   margin: 0;
@@ -116,10 +107,65 @@ button:hover {
   font-weight: 500;
 }
 
-.button {
-  display: flex;
-  justify-content: flex-end;
+.footer {
   padding-bottom: 20px;
+}
+
+.submit,
+.modal-cancel,
+.modal-confirm {
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.submit {
+  float: right;
+  color: white;
+  background-color: rgb(61, 0, 80);
+}
+
+.delete {
+  float: left;
+  color: orangered;
+  text-decoration: underline;
+  border: none;
+  padding: 10px 0;
+}
+
+.modal-container {
+  position: fixed;
+  display: flex;
+  background-color: rgb(0 0 0 / 85%);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.modal {
+  border: solid black 1px;
+  border-radius: 5px;
+  padding: 12px;
+  margin: auto;
+  min-width: 308.65px;
+  background-color: white;
+}
+
+.modal-text {
+  font-size: 14px;
+  font-weight: bolder;
+  padding-bottom: 30px;
+}
+
+.modal-cancel {
+  background-color: rgb(176, 176, 176);
+}
+
+.modal-confirm {
+  float: right;
+  background-color: orangered;
+  color: white;
 }
 
 .no-entries {
