@@ -114,6 +114,11 @@ $modalConfirm.addEventListener('click', function (e) {
   }
   viewSwap('entries');
   toggleModal();
+  $entryType.textContent = 'New Entry';
+  $notes.textContent = '';
+  $journalPhoto.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $newEntry.reset();
+  $delete.className = 'delete hidden';
   data.editing = null;
 });
 
